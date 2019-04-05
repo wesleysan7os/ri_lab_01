@@ -22,8 +22,8 @@ class OantagonistaSpider(scrapy.Spider):
         for article in response.css('article'):
             yield{
                 'titulo': article.css('div.container-post-home a.article_link::attr("title")').get(),
-                #'subtitulo':
-                #'autor':
+                'subtitulo': 'None',
+                'autor': article.css('header.entry-header div::text').get(),
                 'data': article.css('div.container-post-home a.article_link span.postmeta time::text').get(),
                 'secao': article.css('div.container-post-home a.article_link span.postmeta span.categoria::text').get(),
                 'texto': article.css('div.container-post-home a.article_link p::text').get(),
@@ -35,6 +35,4 @@ class OantagonistaSpider(scrapy.Spider):
         with open(filename, 'wb') as f:
             f.write(response.body)
         self.log('Saved file %s' % filename)
-        #
-        #
-        #
+     
